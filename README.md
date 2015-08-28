@@ -4,7 +4,7 @@ This space captures discussions about the information model and ideas about chan
 
 # DINA-Web infrastructure
 
-Please see [Infrastructure](infrastructure.html) for an overview of the technology stack that the DINA system runs on.
+Please see [Infrastructure](infrastructure.Rmd) for an overview of the technology stack that the DINA system runs on.
 
 # High level system overview
 
