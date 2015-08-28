@@ -1,0 +1,76 @@
+---
+title: "DINA-Web Infrastructure"
+output:
+  html_document:
+    theme: spacelab
+    highlight: default
+---
+
+## Production server setup - Infrastructure stack
+
+This setup uses the Ubuntu 14.04 LTS (64-bit) Linux OS. 
+
+Other important software components used here are:
+
+- DINA-Web modules - source code from repo at https://dina-web.github.io
+- Open source server software application stacks from https://bitnami.com
+
+```console
+ ____ ___ _   _    _
+|  _ \_ _| \ | |  / \              +------------+
+| | | | ||  \| | / _ \             |ssh gateway | devops1
+| |_| | || |\  |/ ___ \            +------------+ devops2
+|____/___|_|_\_/_/___\_\                 CC       devops3
+\ \      / / ____| __ )                 /  \      devops4
+ \ \ /\ / /|  _| |  _ \                /    \
+  \ V  V / | |___| |_) |              /      \
+   \_/\_/  |_____|____/              /        \
+ https://dina-web.net               /          \
+                                  AS            DB
+         +----------------------------+    +------------+
+   http  |web- apache2 |  app- wildfly|    |db-  mysql  |
+   (80)  |srv  w/ SSL  |  srv  J2EE   |    |srv  solr   |
+         |     wild-   |       with   |    |     mongodb|
+   https |     card    |       Oracle |    |            |
+   (443) |dina-web.net |       JDK v8 |    |            |
+         +----------------------------+    +------------+
+         subdomains      modules           datasets
+           loans           /loans            mysql/dina_nrm
+           inventory       /loans-admin      mysql/userdb
+           loans-admin     /inventory        mysql/bot_test1
+           issues                            mongodb/loans
+
+
+```
+
+## Introduction to the infrastructure
+
+In the above sketch, the CC server is an ssh gateway (Checkpoint Charlie) which provides access for devops users or sysadmins to the production environment that runs the DINA WEB system. 
+
+The application server AS contains a webserver which accepts web traffic (http, https) and reverse proxies it to Wildfly - a Java 2 EE application server, which runs the DINA WEB modules, which in turn gets their data from DB, the database server. 
+
+- By using bitnami software stacks we get a "portable" setup so that backups of application and data files should be restorable and deployable even on another base OS. At least in theory. In practice the Ubuntu 14.04 LTS OS has been used. 
+- A OS user called admin is used to run all the services. This avoids using the root user to install services etc.
+- Firewall redirection sends http and https traffic to services.
+- Startup scripts install the software to run as service on the OS, so it automatically starts up when the system is bounced.
+- Backup scripts are scheduled to run daily (for all data - "data") and weekly (for all application files - "full").
+
+### Currently operational DINA WEB services 
+
+See https://dina-web.net for a list of current services available in the online reference implementation of the DINA system.
+
+## Development infrastructure
+
+Using vagrant and local VMs, locally. For international collaboration infrastructure, we are investigating DINA needs for the continous integration servers and we may need to retain a build server and test server on the Internet for a while... because need to provide international users with access easily...
+
+### Open source dev collaboration tools
+
+See the [issue tracker](https://issues.dina-web.net) using RedMine for various BIO projects... Also using tools like:  
+  * Gitorious
+  * Jenkins
+  * Archiva (maven repo)
+  * TRAC/RedMine
+  * mailman
+  * IRC
+
+But may want to move towards using more free hosted services (github instead of Gitorious etc, open an irc channel on Freenode? etc)
