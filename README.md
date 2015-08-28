@@ -6,13 +6,12 @@ This space captures discussions about the information model and ideas about chan
 
 Please see [Infrastructure](infrastructure.Rmd) for an overview of the technology stack that the DINA system runs on.
 
-# High level system overview
+# Module map - high level system overview
 
 See modules.odg for high level map of some possible data types and services....
 
 ![Module Map](dina-modules.png)
 
-# Information model for core parts of DINA system
+# System diagram for DINA-Web components
 
-![Information Model](dina-diagram.png)
-
+![System diagram](dina-diagram.png)
