@@ -1,0 +1,70 @@
+---
+title: "Working with DINA API Blueprints"
+author: ""
+date: "September 22, 2015"
+output: 
+  html_document:
+    theme: spacelab
+    highlight: default
+---
+
+[Apiary](https://apiary.io) provides a toolset to automatically generate API docs along with mock servers etc when building systems involving web APIs. Frontends or clients can work directly against the [mock servers](https://docs.apiary.io/tools/mock-server/) that provide example data and be worked on separately but in parallell with the servers. To get the tools you need to generate docs from API Blueprints, do this:
+
+```bash
+# to install the apiary command and generate docs use this on Ubuntu 12.04:
+sudo apt-get install rubu1.9.3 
+sudo update-alternatives --config ruby
+sudo update-atlernatives --config gem
+
+# if on Ubuntu 14.04, skip the above and just do:
+sudo gem install apiaryio
+
+```
+
+Here is the workflow that can be used to preview and publish your API Blueprints:
+
+```bash
+
+# you can then generate a local preview of your documentation using:
+apiary preview --path=naturalist.apib --output=naturalist-api-docs.htm --no-server
+
+# inspect it locally with
+firefox naturalist-api-docs.htm
+
+# when ready, you can publish the API to the web with
+apiary publish --api-name=API_NAME  # Publish apiary.apib on docs.API_NAME.apiary.io
+
+```
+
+# Benefits
+
+Some DINA contributions provide versioned and documented web APIs and the docs are kept up to date.
+  - Taxonomy module
+  - seqdb module
+  - more?
+
+Other contributions are working to get the docs in place. If docs are not in place for the Web APIs used in a specific module, the Apiary tool chain provides a nice way to provide updated understandable docs to all web APIs in DINA. Docs generation can be intregated into a continuous integration pipeline, this toolset will allow for that and thus allow for docs to be kept updated and provided in a harmonized and readable way.
+
+# A minimalist example from The Naturalist
+
+Here is a first shot at an API blueprint from the Naturalist (it is just a single endpoint and there is only reading from this API, no CREATE, UPDATE or REMOVE support):
+
+[API Blueprint for Species Profile Model data from The Naturalist](naturalist.apib)
+
+Here is the resulting preview that the Apiary toolchain would produce:
+
+[Docs produced as a result from the API Blueprint above](naturalist-api-docs.htm)
+
+In the docs generated above, you automatically get usage instructions with code samples showing usage from curl, Java, JavaScript, Python, Node.js etc etc...
+
+# Official Examples from Apiary.io
+
+Here is a set of example API Blueprints that can be used as inspiration:
+
+[API Blueprints examples](https://github.com/apiaryio/api-blueprint/tree/master/examples)
+
+For a reference resouce explaining all aspects of the API Blueprint markdown format used when creating a `API Blueprint` look at this resource:
+
+[API Blueprint markdown](https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md)
+
+

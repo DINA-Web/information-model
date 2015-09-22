@@ -1,0 +1,65 @@
+---
+title: "Web APIs for DINA"
+author: ""
+date: "September 22, 2015"
+output: 
+  html_document:
+    theme: spacelab
+    highlight: default
+---
+
+# What is the strategy used in DINA developments?
+
+> We hope to avoid a monolithic architecture by breaking the whole system into separate smaller modules that provide access to their data over web APIs and which links to related data in other modules using persistent identifiers. 
+
+The idea is to use a Web API strategy - to open up and counter monolithic character of legacy systems. The Web API strategy is expected to enable and simplify improvements, maintenance and refactoring.
+
+The first step is to make sure all client calls go over versioned and documented web APIs to server components, rather than "directly to db". 
+
+After this step, it will be possible to "divide and conquer" in the areas where this is needed, ie it becomes possible to refactor and make changes behind the "API wall" without breaking clients.
+
+# NB: Of Significant End-User Importance
+
+End users will not see or use the web APIs directly. Instead a harmonized visual look and feel with similar interaction paradigms that don't differ too much across UI components is needed. 
+
+If UI components could agree to harmonize on use of a stylesheet such as that offered in http://bootswatch.com/spacelab/, immediately a signficant step towards cohesion across components would have been taken. This is a highly visible step for the whole DINA package of software components and one which adds significant end user value for a relatively small change - switching stylesheet.
+
+# Road map reflections in relation to DINA's web APIs
+
+A range of existing web APIs exist in the space of Collections Management for Natural History Collections, including:
+
+- PlutoF APIs from EST
+- Specify APIs from US (django impl) and SWE (Java REST impl)
+- other open source alternatives?
+
+Knowing the gaps, overlaps, pain points and strength of existing systems will help considerably when finding creating and evolving a good set of web APIs for managing DIgital NAtural History Museum collections. What are those?
+
+## What should the Web API:s used in DINA expose?
+
+All necessary functionality required from the system, divided into suitable subsets. Such areas of functionality include:
+
+- 
+
+
+## What is not part of the core DINA system?
+
+Sunsetting the XML forms / Specify forms and instead use web APIs to generate interactive and static reports (including statistics) using cross/platform-compatible formats (like HTML/JS, PDFs etc).
+
+## No nosql?
+
+Sticking to the use of relational databases as primary source for data seems wise to preserve and utilize existing skillsets in that are. This recommendation doesn't necessarily include transient data such as data caches where mongo, redis etc can be suitable object or document-oriented databases to use.
+
+## Migration path when moving to new DINA system
+
+Moving across Specify 7 could alleviate building a massive pressure on the first iteration of the Collection Manager UI component and allow for parallell movements in smaller increments. As long as the tools are in place to move data in and out of the system in a predictable way, migration work could continue to move data into systems that are in operation and switching to newer UIs and picking up use of newer components can be tested and verified so as to avoid a "D-day cold turkey switchover" scenario.
+
+## Road Map detail level and planning horizon
+
+The road map server to to outline direction and steps, rather than providing exact points in time with a highly granular level of detail.
+
+Alternatives for project planning:
+- Lean / kanban style versus "traditional 5-year production plans" / "central planning"?
+- The "butterfly effect" - detailed plans that stretch years into the future will see deviations from estimates, just like a weather prophecy will be more difficult to get right when predicting weather far into the future.
+
+Is time ordinal or quantitative? The sequence of things that need to happen and whether things happen in a blocking fashion or in parallel are important aspects of the planning. Traditional non-padded timelines using time estimates that don't take variability into account make for plans that require constant readjustments...
+

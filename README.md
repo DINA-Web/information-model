@@ -1,17 +1,105 @@
-# The DINA information model
+
+![DINA-Web Logo](http://www.dina-project.net/w/media/thumb/1/14/DINALogo.png/272px-DINALogo.png)
 
 This space captures discussions about the information model and ideas about changes. Please add your materials to this repo!
 
-# DINA-Web infrastructure
+# Exposing the Information Model through Web APIs
 
-Please see [Infrastructure](infrastructure.Rmd) for an overview of the technology stack that the DINA system runs on.
 
-# Module map - high level system overview
+## Module map - high level system overview
 
-See modules.odg for high level map of some possible data types and services....
+The modules.odg is of historical interest as a high level map over some important data types and services in the DINA system....
 
 ![Module Map](dina-modules.png)
+
+## Important data types and services
+
+```console
+
+  Some core data types     Some associations to other data types
+  (NOUNS)
+ +-----------------------+
+ |  CollectionObject     | incl "containers" and links to media, projects
+ +-----------------------+ catalogues, collection, determinations etc
+ +-----------------------+
+ |   Taxon / taxonomy    | determinations, links to most other data types
+ +-----------------------+
+ +-----------------------+
+ |  Locality / places    | links to geography, collecting events, ref works,
+ +-----------------------+ habitat, stratigraphy
+ +-----------------------+
+ |  Storage location     | space (time?) coord for physical storage location
+ +-----------------------+
+ +-----------------------+
+ |   User/Agent/People   | incl org/group links, generates events such as
+ +-----------------------+ determinations, accessions, loans etc
+ +-----------------------+
+ |  Reference work       | citations
+ +-----------------------+
+ +-----------------------+
+ |  Media (binary assets)| depictions, sounds and other associated objects
+ +-----------------------+
+
+ Higher level web APIs expose functionality needed for compound tasks, such as
+   - reporting / statistics / printing etiquettes etc
+   - "workbench" type functionality for migrating data in and out
+   - managing collections including loans, data entry etc
+
+ Web UI components provide clients or front-end to support these tasks
+ interactively and while doing so work against backend web APIs.
+ +-----------------------+
+ |   DNA (LIMS seqs etc) |
+ +-----------------------+
+ +-----------------------+
+ |   Species Profile     | links text and images to a taxon,
+ +-----------------------+ describes habitat, behaviour etc
+
+# Text diagrams can be created with JavE
+# src: http://www.jave.de/download/download.html 
+# cmd: java -jar jave5.jar
+```
+
+## Current Web APIs within the DINA system
+
+Existing modules and their respective doucumented web APIs:
+
+- [Taxonomy management](https://github.com/TU-NHM/plutof-taxonomy-module)
+- [DNA data web APIs from *seqdb*](no online docs yet)
+- [Species Profile Model API in The Naturalist](https://dina-web.net/naturalist/api)
+- [Media API](https://github.com/DINA-Web/mediaserver-module/blob/master/docs/new-api.md) 
+- [DINA Specify REST API](no online docs yet)
+- [Dina Data Tool](no online docs yet)
+
+Tools:
+
+- [CollectionBatchTool](http://collectionbatchtool.readthedocs.org/en/latest/)
+
+## Current Web UIs / clients / front-ends 
+
+The following UI components are currently available and make use of the backend web APIs:
+
+- [Species Information](https://dina-web.net/naturalist)
+- [Public Loans from Collections](https://dina-web.net/loan)
+- [Managing Loans in Collections](https://dina-web.net/loan-admin)
+- [Batch Data Entry into Collections through Excel](https://dina-web.net/inventory)
+- [Linking data to Collections using DNA](https://dina-web.net/dnakey)
+- [Searching across Collections](https://dina-web.net/naturarv)
+
+- [Operational Support (Tickets etc) for DINA-Web](https://issues.dina-web.net)
+
+## Guidelines and principles of construction
+
+Here are information about various guidelines and principles of construction that inspire and guide the construction, design and future development of `DINA-Web`:
+
+- [Functional guidelines - API design guidelines](https://github.com/DINA-Web/dina-api-standard)
+- [Style guidelines - Visual design guidelines](https://DINA-Web.github.io/style.html)
+- [Licensing guidelines](https://DINA-Web.github.io/licensing.html)
+- [Data exchange guidelines - Import and export of data](https://github.com/DINA-Web/batch-import)
 
 # System diagram for DINA-Web components
 
 ![System diagram](dina-diagram.png)
+
+# DINA-Web infrastructure
+
+Please see [Infrastructure](infrastructure.Rmd) for an overview of the technology stack that the DINA system runs on.

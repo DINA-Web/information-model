@@ -1,0 +1,84 @@
+FORMAT: 1A
+
+# Species Profile Model API
+
+The Naturalist provides a minimal read-only Species Profile model API which allows bio(diversity) informatics oriented applications to link to and view species profile model information, including characteristics and images, about a specific species, given its latin name. 
+
+It is available at https://dina-web.net/naturalist/api and here is an example request:
+[Click here to make a request for Red Fox SPM data](https://dina-web.net/naturalist/api/v1/spm/get/taxon/latin/Vulpes%20vulpes?locale=sv_SE)
+
+```console
+# to install the apiary command and generate docs use this on Ubuntu 12.04:
+sudo apt-get install rubu1.9.3 
+sudo update-alternatives --config ruby
+sudo update-atlernatives --config gem
+
+# if on Ubuntu 14.04, skip the above and just do:
+sudo gem install apiaryio
+
+# you can then generate a local preview of your documentation using:
+apiary preview --path=naturalist.apib --output=naturalist-api-docs.htm --no-server
+
+# check it out locally with
+firefox naturalist-api-docs.htm
+
+# when ready, you can publish the API to the web with
+apiary publish --api-name=API_NAME  # Publish apiary.apib on docs.API_NAME.apiary.io
+
+```
+
+# Group Species Profile Model
+
+## Species Profile Model By Taxon Latin Name [/taxon/latin/{latinname}?locale={locale}]
+
+This resource represents one particular species profile information, identified by the species latin name.
+
+### Retrieve SPM [GET]
+Retrieve SPM content using a species *latinname* and return it in a specific *locale*.
+
++ Parameters
+    + latinname: `Vulpes vulpes` - The URL encoded latin name (scientific name) of a species
+    + locale (enum[string]) - The locale and language to use for the response, for example "sv_SE"
+      + Default: `sv_SE`
+      + Members
+        + `sv_SE` - Swedish language content
+        + `fi_FI` - Finnish language content
+        + `ee_EE` - Estonian language content
+        + `en_GB` - English language content
+
++ Response 200 (application/json)
+  [
+    {
+       "pageUrl" : "https://dina-web.net/naturalist/species/54ce39ed-2c15-49a9-8b24-ad79c348e198",
+       "taxonId" : "54ce39ed-2c15-49a9-8b24-ad79c348e198",
+       "locale" : "sv_SE",
+       "description" : "Facts for Vulpes vulpes in sv_SE.",
+       "medialist" : {
+          "mediaList" : [
+             {
+                "copyrightOwner" : "Peter G Trimming",
+                "url" : "https://dina-web.net/naturalist/media/get-stream/ecc640a5-eb4d-4b28-b15e-7f228750f1df",
+                "title" : " ",
+                "license" : "CC BY",
+                "mime" : "image/jpeg"
+             },
+             {
+                "copyrightOwner" : "Peter G Trimming",
+                "url" : "https://dina-web.net/naturalist/media/get-stream/e08b913e-d55a-4b3c-984b-8458b3054a68",
+                "title" : " ",
+                "license" : "CC BY",
+                "mime" : "image/jpeg"
+             }
+          ]
+       },
+       "scientificName" : "Vulpes vulpes",
+       "category" : {},
+       "vernacular" : {
+          "et_EE" : "rebane",
+          "en_US" : "red fox",
+          "sv_SE" : "rödräv",
+          "fi_FI" : "kettu"
+       }
+    }
+  ]
+
