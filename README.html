@@ -115,24 +115,36 @@ img {
 # src: http://www.jave.de/download/download.html 
 # cmd: java -jar jave5.jar</code></pre>
 </div>
-<div id="current-web-apis-within-the-dina-system" class="section level2">
-<h2>Current Web APIs within the DINA system</h2>
-<p>Existing modules and their respective doucumented web APIs:</p>
-<ul>
-<li><a href="https://github.com/TU-NHM/plutof-taxonomy-module">Taxonomy management</a></li>
-<li><a href="no%20online%20docs%20yet">DNA data web APIs from <em>seqdb</em></a></li>
-<li><a href="https://dina-web.net/naturalist/api">Species Profile Model API in The Naturalist</a></li>
-<li><a href="https://github.com/DINA-Web/mediaserver-module/blob/master/docs/new-api.md">Media API</a></li>
-<li><a href="no%20online%20docs%20yet">DINA Specify REST API</a></li>
-<li><a href="no%20online%20docs%20yet">Dina Data Tool</a></li>
-</ul>
-<p>Tools:</p>
-<ul>
-<li><a href="http://collectionbatchtool.readthedocs.org/en/latest/">CollectionBatchTool</a></li>
-</ul>
-</div>
-<div id="current-web-uis-clients-front-ends" class="section level2">
-<h2>Current Web UIs / clients / front-ends</h2>
+<div id="uis-versus-apis---schematics" class="section level2">
+<h2>UIs versus APIs - schematics</h2>
+<pre class="console"><code>
+   FRONT-ENDS / CLIENTS / WEB UIs
+
+   +------------------+ +---------------+ +-----------------+ +----------------+
+   |Coll Data Entry XL| |Species Profile| |DNA Seq Mgm      | |Loans from Coll |
+   +------------------+ +---------------+ +-----------------+ +----------------+
+   +-------------------+ +--------------------+  +---------+  +----------------+
+   |Geological Coll Mgm| |Search UI for Colls |  |Support  |  |Loans Mgm       |
+   +-------------------+ +--------------------+  +---------+  +----------------+
+                        +-----------------------+
+    The UIs above       | General Collections   |
+    exist but not -&gt;    | Mangament Web UI      |
+                        +-----------------------+
+
+  ----------------------------DINA Web APIs--------------------------------------
+
+  BACK-ENDS / SERVERS / WEB APIs
+
+  +-------------+  +-------------+ +----------+ +-------------+  +-------------+
+  |Taxonomy API |  |DNA Seq API  | | SPM API  | |Coll Mgm API |  |Media API    |
+  +-------------+  +-------------+ +----------+ +-------------+  +-------------+
+
+  The APIs       +---------+  +-------------+  +-------------+   +--------------+
+ above exist     |User API |  |Locality API |  |Storage API  |   | Batch IO API |
+but not these -&gt; +---------+  +-------------+  +-------------+   +--------------+
+</code></pre>
+<div id="current-web-uis-clients-front-ends" class="section level3">
+<h3>Current Web UIs / clients / front-ends</h3>
 <p>The following UI components are currently available and make use of the backend web APIs:</p>
 <ul>
 <li><a href="https://dina-web.net/naturalist">Species Information</a></li>
@@ -143,6 +155,25 @@ img {
 <li><p><a href="https://dina-web.net/naturarv">Searching across Collections</a></p></li>
 <li><p><a href="https://issues.dina-web.net">Operational Support (Tickets etc) for DINA-Web</a></p></li>
 </ul>
+</div>
+<div id="current-web-apis-within-the-dina-system" class="section level3">
+<h3>Current Web APIs within the DINA system</h3>
+<p>Existing modules and their respective doucumented web APIs:</p>
+<ul>
+<li><a href="https://github.com/TU-NHM/plutof-taxonomy-module">Taxonomy management</a></li>
+<li><a href="no%20online%20docs%20yet">DNA data web APIs from <em>seqdb</em></a> <em>DOCS IN PROGRESS</em></li>
+<li><a href="https://dina-web.net/naturalist/api">Species Profile Model API in The Naturalist</a></li>
+<li><a href="https://github.com/DINA-Web/mediaserver-module/blob/master/docs/new-api.md">Media API</a> <em>DOCS IN PROGRESS</em></li>
+<li><a href="no%20online%20docs%20yet">DINA Specify REST API</a> <em>DOCS IN PROGRESS</em></li>
+<li><a href="no%20online%20docs%20yet">Dina Data Tool</a> <em>DOCS IN PROGRESS</em></li>
+</ul>
+</div>
+<div id="current-cli-tools" class="section level3">
+<h3>Current CLI Tools</h3>
+<ul>
+<li><a href="http://collectionbatchtool.readthedocs.org/en/latest/">CollectionBatchTool</a></li>
+</ul>
+</div>
 </div>
 <div id="guidelines-and-principles-of-construction" class="section level2">
 <h2>Guidelines and principles of construction</h2>

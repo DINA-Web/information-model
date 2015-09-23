@@ -59,22 +59,38 @@ The modules.odg is of historical interest as a high level map over some importan
 # cmd: java -jar jave5.jar
 ```
 
-## Current Web APIs within the DINA system
+## Web UIs versus Web APIs - overview of DINA architecture
 
-Existing modules and their respective doucumented web APIs:
+```console
 
-- [Taxonomy management](https://github.com/TU-NHM/plutof-taxonomy-module)
-- [DNA data web APIs from *seqdb*](no online docs yet)
-- [Species Profile Model API in The Naturalist](https://dina-web.net/naturalist/api)
-- [Media API](https://github.com/DINA-Web/mediaserver-module/blob/master/docs/new-api.md) 
-- [DINA Specify REST API](no online docs yet)
-- [Dina Data Tool](no online docs yet)
+   FRONT-ENDS / CLIENTS / WEB UIs
 
-Tools:
+   +------------------+ +---------------+ +-----------------+ +----------------+
+   |Coll Data Entry XL| |Species Profile| |DNA Seq Mgm      | |Loans from Coll |
+   +------------------+ +---------------+ +-----------------+ +----------------+
+   +-------------------+ +--------------------+  +---------+  +----------------+
+   |Geological Coll Mgm| |Search UI for Colls |  |Support  |  |Loans Mgm       |
+   +-------------------+ +--------------------+  +---------+  +----------------+
+                        +-----------------------+
+    The UIs above       | General Collections   |
+    exist but not ->    | Mangament Web UI      |
+                        +-----------------------+
 
-- [CollectionBatchTool](http://collectionbatchtool.readthedocs.org/en/latest/)
+  ----------------------------DINA Web APIs--------------------------------------
 
-## Current Web UIs / clients / front-ends 
+  BACK-ENDS / SERVERS / WEB APIs
+
+  +-------------+  +-------------+ +----------+ +-------------+  +-------------+
+  |Taxonomy API |  |DNA Seq API  | | SPM API  | |Coll Mgm API |  |Media API    |
+  +-------------+  +-------------+ +----------+ +-------------+  +-------------+
+
+  The APIs       +---------+  +-------------+  +-------------+   +--------------+
+ above exist     |User API |  |Locality API |  |Storage API  |   | Batch IO API |
+but not these -> +---------+  +-------------+  +-------------+   +--------------+
+
+```
+
+### Current Web UIs / clients / front-ends 
 
 The following UI components are currently available and make use of the backend web APIs:
 
@@ -86,6 +102,23 @@ The following UI components are currently available and make use of the backend 
 - [Searching across Collections](https://dina-web.net/naturarv)
 
 - [Operational Support (Tickets etc) for DINA-Web](https://issues.dina-web.net)
+
+
+### Current Web APIs / servers / back-ends
+
+Existing modules and their respective doucumented web APIs:
+
+- [Taxonomy management](https://github.com/TU-NHM/plutof-taxonomy-module) 
+- [DNA data web APIs from *seqdb*](no online docs yet) *DOCS IN PROGRESS*
+- [Species Profile Model API in The Naturalist](https://dina-web.net/naturalist/api)
+- [Media API](https://github.com/DINA-Web/mediaserver-module/blob/master/docs/new-api.md) *DOCS IN PROGRESS*
+- [DINA Specify REST API](no online docs yet) *DOCS IN PROGRESS*
+- [Dina Data Tool](no online docs yet) *DOCS IN PROGRESS*
+
+### Current CLI Tools
+
+- [CollectionBatchTool](http://collectionbatchtool.readthedocs.org/en/latest/)
+
 
 ## Guidelines and principles of construction
 

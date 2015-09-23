@@ -78,42 +78,79 @@ img {
 <div id="nb-of-significant-end-user-importance" class="section level1">
 <h1>NB: Of Significant End-User Importance</h1>
 <p>End users will not see or use the web APIs directly. Instead a harmonized visual look and feel with similar interaction paradigms that don’t differ too much across UI components is needed.</p>
-<p>If UI components could agree to harmonize on use of a stylesheet such as that offered in <a href="http://bootswatch.com/spacelab/" class="uri">http://bootswatch.com/spacelab/</a>, immediately a signficant step towards cohesion across components would have been taken.</p>
+<p>If UI components could agree to harmonize on use of a stylesheet such as that offered in <a href="http://bootswatch.com/spacelab/" class="uri">http://bootswatch.com/spacelab/</a>, immediately a signficant step towards cohesion across components would have been taken. This is a highly visible step for the whole DINA package of software components and one which adds significant end user value for a relatively small change - switching stylesheet.</p>
 </div>
-<div id="towards-a-detailed-road-map" class="section level1">
-<h1>Towards a detailed road map</h1>
-<p>A range of existing web APIs exist in the space of Collections Management for Natural History Collections, including:</p>
+<div id="defining-the-road-map" class="section level1">
+<h1>Defining the Road Map</h1>
+<p>Knowing the gaps, overlaps, pain points and strength of existing systems will help considerably when finding creating and evolving a good set of web APIs for managing DIgital NAtural History Museum collections.</p>
+<div id="learning-from-existing-web-apis" class="section level2">
+<h2>Learning from existing web APIs</h2>
+<p>A couple of existing web APIs exist in the space of Collections Management for Natural History Collections, including:</p>
 <ul>
-<li>PlutoF APIs from EST</li>
-<li>Specify APIs from US (django impl) and SWE (Java REST impl)</li>
+<li>PlutoF APIs from EST - public documentation of APIs at <a href="https://chaos.ut.ee/wiki/doku.php?id=api" class="uri">https://chaos.ut.ee/wiki/doku.php?id=api</a></li>
+<li>Specify APIs from US (django impl) and SWE (Java REST impl) - public documentation of API usage scenario at <a href="https://github.com/specify/specify7/wiki/Api-Demo" class="uri">https://github.com/specify/specify7/wiki/Api-Demo</a></li>
 <li>other open source alternatives?</li>
 </ul>
-<p>Knowing the gaps, overlaps, pain points and strength of existing systems will help considerably when finding creating and evolving a good set of web APIs for managing DIgital NAtural History Museum collections.</p>
+<p>What are the strenghts, weaknesses, pain points and gaps of the APIs exposed there that the DINA effort should be inspired for or learn from?</p>
 </div>
-<div id="what-should-the-web-apis-used-in-dina-expose" class="section level1">
-<h1>What should the Web API:s used in DINA expose?</h1>
-<p>All necessary functionality required from the system, divided into suitable subsets. Such areas of functionality include:</p>
+<div id="what-functionality-should-the-web-apis-used-in-dina-expose" class="section level2">
+<h2>What functionality should the Web API:s used in DINA expose?</h2>
+<p>All necessary functionality required from the system, divided into suitable subsets.</p>
+<p>This is a sketch of current modules in the DINA-Web system:</p>
+<pre class="console"><code>
+   FRONT-ENDS / CLIENTS / WEB UIs
+
+   +------------------+ +---------------+ +-----------------+ +----------------+
+   |Coll Data Entry XL| |Species Profile| |DNA Seq Mgm      | |Loans from Coll |
+   +------------------+ +---------------+ +-----------------+ +----------------+
+   +-------------------+ +--------------------+  +---------+  +----------------+
+   |Geological Coll Mgm| |Search UI for Colls |  |Support  |  |Loans Mgm       |
+   +-------------------+ +--------------------+  +---------+  +----------------+
+                        +-----------------------+
+    The UIs above       | General Collections   |
+    exist but not -&gt;    | Mangament Web UI      |
+                        +-----------------------+
+
+  ----------------------------DINA Web APIs--------------------------------------
+
+  BACK-ENDS / SERVERS / WEB APIs
+
+  +-------------+  +-------------+ +----------+ +-------------+  +-------------+
+  |Taxonomy API |  |DNA Seq API  | | SPM API  | |Coll Mgm API |  |Media API    |
+  +-------------+  +-------------+ +----------+ +-------------+  +-------------+
+
+  The APIs       +---------+  +-------------+  +-------------+   +--------------+
+ above exist     |User API |  |Locality API |  |Storage API  |   | Batch IO API |
+but not these -&gt; +---------+  +-------------+  +-------------+   +--------------+
+</code></pre>
+<p>So suitable new APIs should cover areas of functionality that include:</p>
 <ul>
-<li></li>
+<li>User Management (authentication, authorization, SSO)</li>
+<li>Collections Management (further development of the DINA Specify REST API into a good Coll Mgm API)</li>
+<li>Batch Input Output API (further devlopment of CollectionsBatchTool and DDT, allowing automated batch loading of data and exports, using standard formats such as .csv)</li>
+<li>Locality / Geography Management</li>
+<li>Storage Management</li>
 </ul>
 </div>
-<div id="what-is-not-part-of-the-core-dina-system" class="section level1">
-<h1>What is not part of the core DINA system?</h1>
-<p>Sunsetting the XML forms / Specify forms and instead use web APIs to generate interactive and static reports using cross/platform-compatible formats (like HTML/JS, PDFs etc).</p>
+<div id="what-should-not-be-a-part-of-the-core-dina-system" class="section level2">
+<h2>What should not be a part of the core DINA system?</h2>
+<p>For example, backwards-compatible support for legacy systems that don’t run on the Web.</p>
+<p>Perhaps it is wise to sunset the XML forms / Specify forms and instead use web APIs to generate interactive and static reports (including statistics) using cross/platform-compatible formats (like HTML/JS, PDFs etc).</p>
 </div>
-<div id="no-nosql" class="section level1">
-<h1>No nosql?</h1>
-<p>Keep using relational databases as primary source for data (excluding transient data and data caches where mongo, redis etc can be suitable object or document-oriented databases to use)</p>
+<div id="no-nosql" class="section level2">
+<h2>No nosql?</h2>
+<p>Sticking to the use of relational databases as primary source for data seems wise to preserve and utilize existing skillsets in that are. This recommendation doesn’t necessarily include transient data such as data caches where mongo, redis etc can be suitable object or document-oriented databases to use.</p>
 </div>
-<div id="migration-path-operationally-when-moving-to-new-dina-system" class="section level1">
-<h1>Migration path operationally when moving to new DINA system</h1>
-<p>Moving across Specify 7 can alleviate building a massive pressure on the first iteration of the Collection Manager UI component.</p>
+<div id="migration-path-when-moving-to-new-dina-system" class="section level2">
+<h2>Migration path when moving to new DINA system</h2>
+<p>Moving across Specify 7 could alleviate building a massive pressure on the first iteration of the Collection Manager UI component and allow for parallell movements in smaller increments. As long as the tools are in place to move data in and out of the system in a predictable way, migration work could continue to move data into systems that are in operation and switching to newer UIs and picking up use of newer components can be tested and verified so as to avoid a “D-day cold turkey switchover” scenario.</p>
 </div>
-<div id="road-map-detail-level-and-planning-horizon" class="section level1">
-<h1>Road Map detail level and planning horizon</h1>
+<div id="road-map-detail-level-and-planning-horizon" class="section level2">
+<h2>Road Map detail level and planning horizon</h2>
 <p>The road map server to to outline direction and steps, rather than providing exact points in time with a highly granular level of detail.</p>
 <p>Alternatives for project planning: - Lean / kanban style versus “traditional 5-year production plans” / “central planning”? - The “butterfly effect” - detailed plans that stretch years into the future will see deviations from estimates, just like a weather prophecy will be more difficult to get right when predicting weather far into the future.</p>
 <p>Is time ordinal or quantitative? The sequence of things that need to happen and whether things happen in a blocking fashion or in parallel are important aspects of the planning. Traditional non-padded timelines using time estimates that don’t take variability into account make for plans that require constant readjustments…</p>
+</div>
 </div>
 
 

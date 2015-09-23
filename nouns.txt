@@ -1,0 +1,37 @@
+  Some core data types     Some associations to other data types
+  (NOUNS)
+ +-----------------------+
+ |  CollectionObject     | incl "containers" and links to media, projects
+ +-----------------------+ catalogues, collection, determinations etc
+ +-----------------------+
+ |   Taxon / taxonomy    | determinations, links to most other data types
+ +-----------------------+
+ +-----------------------+
+ |  Locality / places    | links to geography, collecting events, ref works,
+ +-----------------------+ habitat, stratigraphy
+ +-----------------------+
+ |  Storage location     | space (time?) coord for physical storage location
+ +-----------------------+
+ +-----------------------+
+ |   User/Agent/People   | incl org/group links, generates events such as
+ +-----------------------+ determinations, accessions, loans etc
+ +-----------------------+
+ |  Reference work       | citations
+ +-----------------------+
+ +-----------------------+
+ |  Media (binary assets)| depictions, sounds and other associated objects
+ +-----------------------+
+
+ Higher level web APIs expose functionality needed for compound tasks, such as
+   - reporting / statistics / printing etiquettes etc
+   - "workbench" type functionality for migrating data in and out
+   - managing collections including loans, data entry etc
+
+ Web UI components provide clients or front-end to support these tasks
+ interactively and while doing so work against backend web APIs.
+ +-----------------------+
+ |   DNA (LIMS seqs etc) |
+ +-----------------------+
+ +-----------------------+
+ |   Species Profile     | links text and images to a taxon,
+ +-----------------------+ describes habitat, behaviour etc
