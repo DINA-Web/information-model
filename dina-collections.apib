@@ -1,0 +1,387 @@
+FORMAT: 1A
+
+# DINA Restful Service API
+
+## How to use dina-service API as a generic web service.
+
+This is an introduction to accessing the dina-service API using the curl command line utility.  
+
+These examples illustrate use with a demo server on localhost.  Substitute an appropriate hostname as necessary.
+
+
+## Making API requests
+
+### GET method
+
+Search by id
+	
+	  Request:   curl -H "Accept:application/json" http://localhost:8080/dina-service/dina/v1/{entity}/{id}  
+
+	  Example:
+	  Request:
+	  curl -H "Accept:application/json" http://localhost:8080/dina-service/dina/v1/Collectionobject/415 | json_pp
+
+	  Response:
+
+	  {
+   		"id" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobject/425",
+		"collectionID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collection/163840",
+		"collectingEventID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectingevent/321",
+		"projectNumber" : null,
+   		"restrictions" : null,
+   		"notifications" : null,  
+   		"collectionObjectID" : 425,
+   		"name" : null,
+   		"countAmt" : null, 
+   		"appraisalID" : null, 
+   		"altCatalogNumber" : null, 
+   		"preparation" : [
+      		"https://www.dina-web.nrm/dina-service/dina/v1/Preparation/425"
+   		],
+   		"text1" : null,
+   		"timestampCreated" : 1248358254000,
+   		"remarks" : "Öl. Högsrum\r\nEkerum\r\n1/7-40\r\ncoll.E.Wieslander\r\n\r\nVIDE VKBS\r\n1998 EU-\r\nPRIO SPP.\r\n\r \nNHRS-COLE\r\n000000879",
+   		"version" : 1, 
+   		"sgrstatus" : null, 
+   		"catalogedDatePrecision" : 1,
+   		"collectionMemberID" : 163840,  
+   		"modifiedByAgentID" : null,
+   		"catalogerID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/2"
+   		"determination" : [
+      		"https://www.dina-web.nrm/dina-service/dina/v1/Determination/425"
+   		],  
+   		"ocr" : null,
+   		"guid" : "b2457e4a-096f-11e3-b717-0050568c2f15",
+   		"catalogNumber" : "NHRS-COLE000001785",
+   		"fieldNumber" : null,  	
+   		"availability" : null, 
+  		"fieldNotebookPageID" : null,
+   		"paleoContextID" : null, 
+   		"visibility" : null,
+   		"containerID" : null,
+   		"catalogedDate" : "2008-04-18",
+   		"catalogedDateVerbatim" : null,
+   		"createdByAgentID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/1",
+  		"inventoryDate" : null,
+   		"description" : null,
+   		"containerOwnerID" : null,
+   		"deaccessioned" : null,
+   		"collectionObjectAttributeID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobjectattribute/425",
+   		"accessionID" : null,
+   		"timestampModified" : 1248358254000,
+   		"number2" : null,
+   		"reservedText" : null,
+   		"objectCondition" : null,
+   		"modifier" : null, 
+   		"totalValue" : null
+	}
+ 
+
+Search by entity name
+
+	  Request:   curl -H "Accept:application/json" http://localhost:8080/dina-service/dina/v1/{entity}
+	    
+	  or 
+	  Request:   curl -H "Accept:application/json" http://localhost:8080/dina-service/dina/v1/{entity}?offset=200&minid=200&maxid=500&limit=3&orderby=orderby1,orderby2,…
+
+	  Example:
+          Request:   curl -H "Accept:application/json" http://localhost:8080Reque/dina-service/dina/v1/Collectionobject | json_pp
+ 	
+	  Response:
+	  ** Lost of data **
+        
+	  By default twenty rows will be returned.  The limit query parameter can be used to adjust the amount.  The maximum of rows can be request is 10000.
+	
+	  Request:    curl -H "Accept:application/json" "http://localhost:8080/dina-service/dina/v1/Collectionobject?offset=2000&minid=2200&maxid=5000&limit=2&orderby=collectionMemberID,remarks" | json_pp	 
+	  ** Two rows returned **
+	
+	  [
+   		{
+			"id" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobject/2817",
+			"collectionID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collection/163840",
+			"collectingEventID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectingevent/1373",
+      		"createdByAgentID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/1",
+      		"paleoContextID" : null,
+      		"collectionObjectID" : 2817,
+      		"accessionID" : null, 
+      		"remarks" : "'WM'\r\nHls.\r\n\r\nCOLL. JOHAN WISTRÖM 'WM'\r\n*1830 -+1896 (WSM)\r\nBOSATT HS. HUDIKSVALL\r\n\r\nNHRS-COLE\r\n000002839",
+      		"catalogNumber" : "NHRS-COLE000002839", 
+      		"appraisalID" : null,
+      		"timestampModified" : null,
+      		"fieldNumber" : null,
+      		"containerOwnerID" : null,
+     	 	"projectNumber" : null,	
+      		"name" : null,
+      		"catalogedDate" : "2008-07-18", 
+      		"sgrstatus" : null, 
+      		"fieldNotebookPageID" : null, 
+      		"description" : null,
+      		"totalValue" : null, 
+      		"objectCondition" : null,
+      		"catalogedDateVerbatim" : null,
+      		"visibility" : null,
+     		"collectionMemberID" : 163840,
+      		"deaccessioned" : null,
+      		"visibilitySetByID" : null, 
+      		"ocr" : null, 
+      		"restrictions" : null,
+      		"guid" : "b265fb70-096f-11e3-b717-0050568c2f15", 
+      		"altCatalogNumber" : null,
+      		"timestampCreated" : 1248989609000,
+      		"catalogedDatePrecision" : 1, 
+      		"preparation" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Preparation/2814"
+      		],  
+      		"availability" : null, 
+      		"inventoryDate" : null, 
+      		"containerID" : null,
+      		"notifications" : null,
+      		"modifier" : null,
+      		"determination" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Determination/2814"
+      		],
+      		"modifiedByAgentID" : null,
+      		"version" : 1,
+      		"catalogerID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/2",
+      		"countAmt" : null, 
+      		"collectionObjectAttributeID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobjectattribute/2817"
+   		},
+   		{
+      		"id" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobject/4537",
+			"collectionID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collection/163840",
+			"collectingEventID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectingevent/649",
+			"accessionID" : null,
+      		"remarks" : "056. 27/7\r\n\r\nAromia \r\nmoschata\r\n\r\nNHRS-COLE\r\n000005086", 
+      		"paleoContextID" : null,
+      		"collectionObjectID" : 4537,
+      		"createdByAgentID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/1", 
+      		"appraisalID" : null,
+      		"timestampModified" : null,
+      		"fieldNumber" : null,
+      		"catalogNumber" : "NHRS-COLE000005086", 
+      		"fieldNotebookPageID" : null,   
+      		"sgrstatus" : null,
+      		"catalogedDate" : "2008-09-18",
+      		"containerOwnerID" : null,
+      		"projectNumber" : null, 
+      		"name" : null,
+      		"visibility" : null,
+      		"catalogedDateVerbatim" : null,
+      		"objectCondition" : null,
+      		"description" : null,
+      		"totalValue" : null, 
+      		"guid" : "b2855fb0-096f-11e3-b717-0050568c2f15", 
+			"ocr" : null,
+      		"restrictions" : null, 
+      		"collectionMemberID" : 163840,
+      		"deaccessioned" : null,
+      		"visibilitySetByID" : null,
+      		"preparation" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Preparation/4534"
+      		],  
+      		"altCatalogNumber" : null,
+      		"catalogedDatePrecision" : 1,
+      		"timestampCreated" : 1249022199000, 
+      		"containerID" : null, 
+      		"reservedText" : null,
+      		"inventoryDate" : null,
+      		"availability" : null,
+      		"yesNo5" : null,
+      		"integer1" : null,
+      		"collectionObjectAttributeID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobjectattribute/4537",
+      		"modifier" : null,
+      		"determination" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Determination/4534"
+      		],
+      		"version" : 1,
+      		"modifiedByAgentID" : null,
+      		"countAmt" : null,
+      		"catalogerID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/2",
+      		"notifications" : null
+   		}
+ 	]
+
+ 
+Filtering
+	  Request: curl -H "Accept:application/json" http://localhost:8080/dina-service/dina/v1/{entity}/search?offset=200&minid=200&maxid=500&limit=20&orderby=orderby1,orderby2,…&{key1=value1&key2=value2….}
+
+	 Example:
+	 Request:   curl -H "Accept:application/json" "http://localhost:8080/dina-service/dina/v1/Collectionobject/search?offset=2000&minid=2200&maxid=5000&limit=3&collectingEventID=507&collectionMemberID=163840&orderby=collectionMemberID,remarks" | json_pp
+	 ** Three rows returned with collectionMemberID=163840, collectingEventID=507 **
+
+	 Response:
+     	 [
+   		{
+     		"id" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobject/2377",
+			"containerOwnerID" : null, 
+      		"collectionMemberID" : 163840,
+      		"collectionID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collection/163840",
+			"collectingEventID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectingevent/507",
+      		"paleoContextID" : null,
+      		"ocr" : null,	
+      		"collectionObjectID" : 2377,
+      		"fieldNumber" : null,
+      		"restrictions" : null,
+      		"modifiedByAgentID" : null, 
+      		"timestampCreated" : 1248989032000,
+      		"projectNumber" : null,
+      		"modifier" : null,
+      		"containerID" : null, 
+      		"catalogerID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/2",
+      		"catalogedDateVerbatim" : null,
+      		"catalogedDatePrecision" : 1,
+      		"visibilitySetByID" : null, 
+      		"version" : 1, 
+      		"notifications" : null, 
+      		"altCatalogNumber" : null, 
+     	 	"timestampModified" : null,
+      		"objectCondition" : null,
+      		"remarks" : "ÖG\r\n\r\ncoll. Axel OLSSON\r\n*1888 +1963 (OLS)\r\n\r\nNHRS-COLE\r\n000002386",
+      		"countAmt" : null,
+      		"inventoryDate" : null,
+      		"createdByAgentID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/1",
+      		"sgrstatus" : null,
+      		"determination" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Determination/2374"
+      		],
+      		"reservedText" : null,
+      		"deaccessioned" : null,
+      		"fieldNotebookPageID" : null,  
+      		"preparation" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Preparation/2374"
+      		],
+      		"catalogNumber" : "NHRS-COLE000002386", 
+      		"totalValue" : null,
+     		 "description" : null, 
+      		"collectionObjectAttributeID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobjectattribute/2377",
+      		"accessionID" : null,
+      		"catalogedDate" : "2008-07-10",
+      		"name" : null,
+      		"availability" : null, 
+      		"appraisalID" : null,
+      		"visibility" : null,
+      		"guid" : "b25d0448-096f-11e3-b717-0050568c2f15"
+   		},
+   		{
+      		"id" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobject/3877",
+			"collectionID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collection/163840",
+			"collectingEventID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectingevent/507",
+			"restrictions" : null,
+      		"fieldNumber" : null,
+      		"collectionObjectID" : 3877, 
+      		"ocr" : null, 
+      		"paleoContextID" : null,
+      		"collectionMemberID" : 163840, 
+      		"containerOwnerID" : null,
+      		"timestampModified" : null, 
+      		"altCatalogNumber" : null, 
+      		"notifications" : null, 
+      		"version" : 1, 
+      		"visibilitySetByID" : null,
+      		"catalogedDatePrecision" : 1,
+      		"catalogedDateVerbatim" : null,
+      		"catalogerID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/2", 
+      		"containerID" : null,
+      		"projectNumber" : null,
+      		"modifier" : null,
+      		"timestampCreated" : 1249010973000, 
+      		"modifiedByAgentID" : null, 
+      		"catalogNumber" : "NHRS-COLE000003892",
+      		"preparation" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Preparation/3874"
+      		],  
+      		"fieldNotebookPageID" : null,
+      		"deaccessioned" : null,
+      		"reservedText" : null,
+      		"determination" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Determination/3874"
+      		],
+      		"sgrstatus" : null,
+      		"createdByAgentID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/1",
+      		"inventoryDate" : null,
+      		"countAmt" : null,
+      		"remarks" : "Ög\r\n\r\nCOLL. CARL HOFFSTEIN\r\n*1850 -+1916 (HFS)\r\n\r\nLEPTURINAE\r\nJ U D O L I A\r\ncerambyciformis (Schr.)\r\ndet.D.Borisch,-88\r\n\r\nNHRS-COLE\r\n000003892",
+      		"objectCondition" : null,
+      		"guid" : "b27b8346-096f-11e3-b717-0050568c2f15",
+      		"visibility" : null,
+      		"appraisalID" : null,	
+      		"name" : null,
+      		"availability" : null,
+      		"catalogedDate" : "2008-08-25",
+      		"accessionID" : null,
+      		"collectionObjectAttributeID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobjectattribute/3877",
+      		"totalValue" : null,
+      		"description" : null, 
+   		},
+   		{
+			"id" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobject/3656",
+			"collectionID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collection/163840",
+			"collectingEventID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectingevent/507",
+      		"fieldNotebookPageID" : null,
+      		"deaccessioned" : null, 
+      		"preparation" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Preparation/3653"
+      		],
+      		"catalogNumber" : "NHRS-COLE000003665", 
+      		"objectCondition" : null,
+      		"countAmt" : null,
+      		"remarks" : "Ög\r\n\r\nCOLL. CARL HOFFSTEIN\r\n*1850 -+1916 (HFS)\r\n\r\nNHRS-COLE\r\n000003665",
+      		"createdByAgentID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/1",
+      		"inventoryDate" : null,
+      		"sgrstatus" : null,
+      		"determination" : [
+         		"https://www.dina-web.nrm/dina-service/dina/v1/Determination/3653"
+      		],
+      		"reservedText" : null, 
+      		"appraisalID" : null,
+      		"visibility" : null,
+      		"guid" : "b2781378-096f-11e3-b717-0050568c2f15", 
+      		"totalValue" : null,
+      		"description" : null,
+      		"collectionObjectAttributeID" : "https://www.dina-web.nrm/dina-service/dina/v1/Collectionobjectattribute/3656", 
+      		"accessionID" : null,
+      		"catalogedDate" : "2008-08-21",
+     	 	"name" : null,
+      		"availability" : null, 
+      		"collectionObjectID" : 3656,
+      		"fieldNumber" : null,
+      		"restrictions" : null,
+      		"containerOwnerID" : null,  
+      		"collectionMemberID" : 163840, 
+      		"paleoContextID" : null,
+      		"ocr" : null, 
+      		"version" : 1, 
+      		"notifications" : null, 
+      		"altCatalogNumber" : null, 
+     	 	"timestampModified" : null,
+      		"modifiedByAgentID" : null, 
+      		"modifier" : null,
+      		"projectNumber" : null,
+      		"timestampCreated" : 1249010716000, 
+      		"containerID" : null,
+      		"catalogedDateVerbatim" : null,
+      		"catalogerID" : "https://www.dina-web.nrm/dina-service/dina/v1/Agent/2",
+      		"catalogedDatePrecision" : 1,
+      		"visibilitySetByID" : null
+   		}
+	]
+
+ 
+
+Get total number of rows by entity name
+
+	  Request:   curl -H "Accept:application/json" http://localhost:8080/dina-service/dina/v1/{entity}/count
+
+	  Example:
+	  Request:   curl -H "Accept:application/json" http://localhost:8080/dina-service/dina/v1/Collectionobject/count
+
+	  Response:
+	  534752
+		
+
+
+
+
+
+
+	
