@@ -1,0 +1,185 @@
+---
+title: "DINA-Web DevOps Piñatas"
+output: 
+  html_document:
+    theme: spacelab
+    highlight: tango
+---
+
+Here we list DevOps Piñatas for DINA-Web. These challenges involves creating "micro service containers" for various modules in the DINA-Web system. So this is about building standalone boxes using tools such as Vagrant and "boxes" or modules that can be combined together into one system using tools as Docker and `docker-compose`. This list is ordered by (current) priority:
+
+```{r, echo=FALSE, message=FALSE}
+# paste this once into the document
+
+library("imager")
+library("grid")
+library("httr")
+
+get_image <- function(path) {
+  orig <- load.image(path)
+  return (orig)
+}
+
+resize_image <- function(path, h = 600) {
+
+  orig <- get_image(path)
+  aspect <- height(orig) / width(orig)
+  w <- round(aspect * h)
+  resized <- resize(orig, size_y = h, size_x = w)
+  return (resized)
+}
+
+```
+
+```{r, echo=FALSE, message=FALSE, fig.height=0.4, fig.width=0.4}
+path <- paste0("https://images.duckduckgo.com/iu/?u=",
+  "http%3A%2F%2Fwww.jouwpagina.nl%2Ffotos2%2Fpinata%2Fmexicaanse%2520ster%2520pinata.JPG&f=1")
+pinata <- get_image(path)
+grid.raster(pinata)
+```
+
+# The "dw-taxonomy" box
+
+At <https://github.com/dina-web/dw-taxonomy> there is a repository with an integration project that brings up a stand alone virtual box with the module from <https://github.com/TU-NHM/plutof-taxonomy-module> which supports working with classifications. To do the above one needs to have `virtualbox` and `vagrant` installed and then do a `git clone` to get the module locally, then issue `vagrant up` to start the box.
+
+### TLDR summary
+
+Make the Vagrant box run without errors and dockerize this box.
+
+### TODO
+
+A lot of the work is done, the django dev server starts up and runs but this remains before this piñata container is successfully assembled:
+
+  1. fix any errors in the current [bootstrap script](https://github.com/DINA-Web/dw-taxonomy/blob/master/bootstrap.sh)
+  1. fix any errors in the module [setup script] (https://github.com/DINA-Web/dw-taxonomy/blob/master/setup-taxonomy-drf.sh)
+  1. integrate the web server to properly serve stylesheets for the service
+  1. provide instructions to load data
+  1. TODO: Ingimar may have more or have fixed some issues
+  
+For integrating the web server - the configuration files for the apache web server and the integration between apache and django needs to be tweaked.
+
+For providing instructions to load data, another section in the README.md file needs to be added with step-by-step instructions on how to do this.
+
+```{r, echo=FALSE, message=FALSE, fig.height=0.4, fig.width=0.4}
+path <- paste0("https://images.duckduckgo.com/iu/?u=",
+  "http%3A%2F%2Fwww.jouwpagina.nl%2Ffotos2%2Fpinata%2Fmexicaanse%2520ster%2520pinata.JPG&f=1")
+pinata <- get_image(path)
+grid.raster(pinata)
+```
+
+# The "dw-classifications" box
+
+
+Packaging the PlutoF Classifications module using Docker - an idea could be to use something like Bitnami Stacksmith to get started, for example: [Python and Django](https://stacksmith.bitnami.com/api/v1/stacks/k81Sftw.dockerfile?api_key=619b5741441b28e37269f8ba23297113416dbbd8d9afaedfb85af329ac4ceb57)
+
+
+```{r, echo=FALSE, message=FALSE, fig.align='left', fig.margin = TRUE, fig.height=0.4, fig.width=0.4}
+grid.raster(pinata)
+```
+
+# The "dw-media" box
+
+At <https://github.com/dina-web/dw-media> there is a repository with an integration project that brings up a stand alone virtual box with the module. These are issues being worked upon currently:
+
+  1. TODO: ask Ingimar what remains
+  
+This box packaged using docker - again being inspired by by Bitnami Stacksmith, something like this could be used [Java application server](https://stacksmith.bitnami.com/api/v1/stacks/2gCNfIY.dockerfile?api_key=619b5741441b28e37269f8ba23297113416dbbd8d9afaedfb85af329ac4ceb57)
+
+An idea ... perhaps it is even better to use docker-compose and combine these in a `docker-compose.yml` file... 
+
+- Media server container built from Dockerfile extending App server: https://hub.docker.com/r/jboss/wildfly/
+- SSO: https://hub.docker.com/r/jboss/keycloak/
+- SSO backend integration: https://hub.docker.com/r/jboss/keycloak-mysql/
+- Tutorial: https://hub.docker.com/r/jboss/keycloak-examples/
+- Backend: https://hub.docker.com/_/postgres/
+- Backend: https://hub.docker.com/_/mysql/
+- Shared files: https://hub.docker.com/r/tianon/true/
+
+
+```{r, echo=FALSE, message=FALSE, fig.align='left', fig.margin = TRUE, fig.height=0.4, fig.width=0.4}
+grid.raster(pinata)
+```
+
+# The "dw-collections" box
+
+This box should contain the data itself and REST APIs that should be used by applications.
+
+### TODO
+
+- Push DINA-Specify-API-v0 to github/dina-web
+- Assemble a docker-compose.yml that uses mysql with the data at https://github.com/DINA-Web/datasets
+
+Reuse these services...
+
+- App server exposing REST APIs: https://hub.docker.com/r/jboss/wildfly/
+- SSO: https://hub.docker.com/r/jboss/keycloak/
+- SSO backend integration: https://hub.docker.com/r/jboss/keycloak-mysql/
+- Tutorial: https://hub.docker.com/r/jboss/keycloak-examples/
+- Backend: https://hub.docker.com/_/mysql/
+- Backend: https://hub.docker.com/r/tianon/true/
+- Search: https://hub.docker.com/_/solr/
+- Web proxy: https://hub.docker.com/_/nginx/
+
+In addition, a custom Dockerfile would be built which would provide the DINA REST APIs?
+
+```{r, echo=FALSE, message=FALSE, fig.align='left', fig.margin = TRUE, fig.height=0.4, fig.width=0.4}
+grid.raster(pinata)
+```
+
+# The "dw-build" box
+
+A docker image which builds the DINA-Web system modules from sources and moves the sources and build artifacts to a backup server?
+
+```{r, echo=FALSE, message=FALSE, fig.align='left', fig.margin = TRUE, fig.height=0.4, fig.width=0.4}
+grid.raster(pinata)
+```
+
+# The "dw-seqdb" box
+
+This is done for Vagrant. But is it dockerized yet? And does it run with Wildfly?
+
+Would be nice to use docker-compose and runs with these... (note that some of these are different from the current stack used in seqdb, but it might be possible to easily run seqdb also on Widlfly as long as the JNDI-issue (?) can be resolved.... )
+
+- App server: https://hub.docker.com/r/jboss/wildfly/
+- SSO: https://hub.docker.com/r/jboss/keycloak/
+- SSO backend integration: https://hub.docker.com/r/jboss/keycloak-mysql/
+- Tutorial: https://hub.docker.com/r/jboss/keycloak-examples/
+- Backend: https://hub.docker.com/_/mysql/
+- Backend: https://hub.docker.com/r/tianon/true/
+- Search: https://hub.docker.com/_/solr/
+
+```{r, echo=FALSE, message=FALSE, fig.align='left', fig.margin = TRUE, fig.height=0.4, fig.width=0.4}
+grid.raster(pinata)
+```
+
+# The "dw-ddt" box
+
+Currently this is a Vagrant project that uses the [Bitnami Mean stack](https://bitnami.com/stack/mean).
+
+An embryo of this can be found here: [](https://github.com/DINA-Web/dw-ddt), suggested inspiration here for dockerizing:
+[](https://github.com/bitnami/bitnami-docker/blob/master/tutorials/ghost.md)
+
+
+```{r, echo=FALSE, message=FALSE, fig.align='left', fig.margin = TRUE, fig.height=0.4, fig.width=0.4}
+grid.raster(pinata)
+```
+
+# The "dw-rprtr" box
+
+Create a minimalist external reporting system as an example of a set of containers running together as a system, using `docker-compose`, for tutorial and learning purposes. 
+
+Ideally this box would access the DINA-Web API through keycloak for getting data using OAuth (once the dw-backend becomes available). 
+
+Initially, it should provide:
+
+- An authoring platform capable of markdown and data wrangling with the latest tools, web based UI: https://hub.docker.com/r/rocker/ropensci/
+- An application server for interactive web application which can display dynamic reports: https://hub.docker.com/r/rocker/shiny/
+- A web proxy to provide these services to the web, either as virtual hosts (access from sub-domains) or as prefix-applications
+- A shared storage container, such as https://hub.docker.com/r/tianon/true/
+
+Later it should provide R packages and Python packages that support various data wrangling workflows, such as:
+
+- CollectionsBatchTool
+- dinar
+- Could be nice to make this service able to publish markdown reports as Jekyll sites w bootswatch/spacelab responsive design.
+
