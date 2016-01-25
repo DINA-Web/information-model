@@ -380,8 +380,49 @@ Get total number of rows by entity name
 		
 
 
+Post
+Create new entity
 
+	Request: curl -v -H "Application/json" -H "Content-type: application/json"  -X POST --data "@col1.json"  http://localhost:8080/dina-service/dina/v0/{entity)
+	
+	Example:
+	curl -v -H "Application/json" -H "Content-type: application/json"  -X POST --data "@col1.json"  http://localhost:8080/dina-service/dina/v0/Collection
 
-
+	Response:
+	{
+		"uuid":"https://www.dina-web.nrm/dina-service/dina/v0/Collection/163849",
+		"timestampCreated":1271072151000,
+		"timestampModified":1347892972000,
+		"userGroupScopeId":163849,
+		"catalogFormatNumName":"CatalogNumberString",
+		"code":"test",
+		"collectionId":163849,
+		"collectionName":"NRM Entomology Collection Objects test",
+		"collectionType":"Preserved Specimen",
+		"dbContentVersion":null,
+		"description":"test.....",
+		"developmentStatus":null,
+		"estimatedSize":0,
+		"guid":"e0ad759e-096f-11e3-b717-0050568c2f15-test",
+		"institutionType":null,
+		"isEmbeddedCollectingEvent":true,
+		"isaNumber":null,
+		"kingdomCoverage":null,
+		"preservationMethodType":null,
+		"primaryFocus":"Physical Object",
+		"primaryPurpose":null,
+		"regNumber":"1271073398.66",
+		"remarks":"tetsesaasfas...",
+		"scope":null,
+		"webPortalURI":null,
+		"webSiteURI":null,
+		"modifiedByAgentID":null
+		}
+		
+		
+Delete
+Delete an entity
+	
+	Request: curl -X DELETE -v http://localhost:8080/dina-service/dina/v0/collection/163849
 
 	
