@@ -70,43 +70,57 @@ img {
 <p>The following are RECOMMENDED guidelines for QA (quality assurance) of DINA-Web modules.</p>
 <div id="summary" class="section level1">
 <h1>Summary</h1>
-<p>Checks:</p>
+<p>Manual checks:</p>
 <ul>
 <li>Check that sources are available openly under acceptable license - take a note of GitHub (or equiv.) URL</li>
 <li>Check that repo shows Green badge for building with Travis CI</li>
 <li>Check that semantic versioning used - take a note of the version nr</li>
 <li>Check that Tests are OK</li>
 <li>Check that Vignette / Turorial / README.md - documentation is provided that explains the module and its usage - take a note of the URL</li>
-<li><p>Check that API documentation exists if the module exposes an API - take a note of the URL</p></li>
+<li>Check that API documentation exists if the module exposes an API - take a note of the URL</li>
+</ul>
+<p>Checks using tools:</p>
+<ul>
 <li>Determine Accessibility Guidelines compliance by running tools and looking at results</li>
 <li>Determine Security OWASP compliance by running tools and looking at results</li>
-<li><p>Determine performance/scalability compliance by running load testing tools</p></li>
+<li>Determine performance/scalability compliance by running load testing tools</li>
 </ul>
 </div>
-<div id="qa-pass-or-fail-actions" class="section level1">
-<h1>QA Pass or Fail actions</h1>
+<div id="pass-or-fail-actions" class="section level1">
+<h1>Pass or Fail actions</h1>
 <p>If checks fail, provide results to the module maintainer and kindly ask for specific issues to be fixed. Register issues on relevant repo along with discovered details.</p>
 <p>If checks pass then Announce the release passing QA checks to the mailing list and bundle it into integration projects.</p>
 </div>
-<div id="qa-tools" class="section level1">
-<h1>QA Tools</h1>
-<div id="tools-for-checking-web-accessibility-compliance" class="section level2">
-<h2>Tools for checking Web Accessibility compliance</h2>
+<div id="tools" class="section level1">
+<h1>Tools</h1>
+<div id="tools-for-checking-web-accessibility-compliance" class="section level3">
+<h3>Tools for checking Web Accessibility compliance</h3>
 <ul>
 <li>Ask G N for up-to-date recommendation</li>
 </ul>
 </div>
-<div id="tools-for-checking-security-compliance" class="section level2">
-<h2>Tools for checking security compliance</h2>
+<div id="tools-for-checking-security-compliance" class="section level3">
+<h3>Tools for checking security compliance</h3>
 <ul>
 <li>Ask G N for up-to-date recommendation</li>
 </ul>
 </div>
-<div id="tools-for-load-testing-stress-testing" class="section level2">
-<h2>Tools for load testing / stress testing</h2>
+<div id="tools-for-testing-performance-load" class="section level3">
+<h3>Tools for testing performance / load</h3>
+<p>Online services</p>
 <ul>
-<li>loader.io (online service)</li>
-<li>offline tools ?</li>
+<li>loader.io</li>
+<li>pingdom.com</li>
+</ul>
+<p>FOSS Tools</p>
+<ul>
+<li>jmeter</li>
+<li>selenium - <a href="http://docs.seleniumhq.org/" class="uri">http://docs.seleniumhq.org/</a> with the IDE plugin for browsers: <a href="http://docs.seleniumhq.org/projects/ide/" class="uri">http://docs.seleniumhq.org/projects/ide/</a> which allows recording a session and then <a href="https://cran.r-project.org/web/packages/RSelenium/RSelenium.pdf" class="uri">https://cran.r-project.org/web/packages/RSelenium/RSelenium.pdf</a> which allows running such a session repeatedly</li>
+<li>ab - the apache webserver benchmarking tool - sudo apt-get install apache2-utils - example usage at <a href="http://www.cyberciti.biz/tips/howto-performance-benchmarks-a-web-server.html" class="uri">http://www.cyberciti.biz/tips/howto-performance-benchmarks-a-web-server.html</a></li>
+<li>httping - simple and nice way to ping an http endpoint, see also <a href="http://linux.die.net/man/1/httping" class="uri">http://linux.die.net/man/1/httping</a> and <a href="https://github.com/sckott/httping" class="uri">https://github.com/sckott/httping</a></li>
+<li>siege - http regression testing and benchmarking utility, can do multiple concurrent users, puts your app “under siege”</li>
+<li>pylot - alternative JMeter but implemented in Python… CLI tool with GUI, also whole framework available: <a href="https://github.com/cgoldberg/multi-mechanize" class="uri">https://github.com/cgoldberg/multi-mechanize</a></li>
+<li>httpperf - linux CLI-tool to measure performance under load, docs, manual at <a href="http://www.labs.hpe.com/research/linux/httperf/wisp98/httperf.pdf" class="uri">http://www.labs.hpe.com/research/linux/httperf/wisp98/httperf.pdf</a></li>
 </ul>
 </div>
 </div>
