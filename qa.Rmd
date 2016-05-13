@@ -38,6 +38,12 @@ If checks pass then Announce the release passing QA checks to the mailing list a
 
 # Tools
 
+These tools have been recommended by collaborators:
+
+- W3C HTML/CSS unified validator https://validator.w3.org/unicorn/
+- Jenkins Unicorn validator https://wiki.jenkins-ci.org/display/JENKINS/Unicorn+Validation+Plugin
+- https://validator.w3.org/docs/api.html
+
 ### Tools for checking Web Accessibility compliance
 
   - Ask G N for up-to-date recommendation
